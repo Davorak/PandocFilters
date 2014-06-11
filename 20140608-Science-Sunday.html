@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Patrick Wheeler" />
+  <title>Quick Scriptable Markdown with Pandoc</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; }
+code > span.dt { color: #204a87; }
+code > span.dv { color: #0000cf; }
+code > span.bn { color: #0000cf; }
+code > span.fl { color: #0000cf; }
+code > span.ch { color: #4e9a06; }
+code > span.st { color: #4e9a06; }
+code > span.co { color: #8f5902; font-style: italic; }
+code > span.ot { color: #8f5902; }
+code > span.al { color: #ef2929; }
+code > span.fu { color: #000000; }
+code > span.er { font-weight: bold; }
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+   href="test.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Quick Scriptable Markdown with Pandoc</h1>
+  <p class="author">
+Patrick Wheeler
+  </p>
+  <p class="date">June 8 2014</p>
+</div>
+<div id="swiss-arm-knife-converstion-tool" class="slide section level1">
+<h1>Swiss Arm Knife Converstion Tool</h1>
+<ul>
+<li><p>Pandoc is can be used to convert between a number of markdown and markup file formats</p>
+<pre><code>Input formats:  docbook, haddock, html, json, latex, markdown,
+                markdown_github, markdown_mmd,
+                markdown_phpextra, markdown_strict, mediawiki,
+                native, opml, org, rst, textile
+Output formats: asciidoc, beamer, context, docbook, docx,
+                dzslides, epub, epub3, fb2, html, html5, icml,
+                json, latex, man, markdown, markdown_github,
+                markdown_mmd, markdown_phpextra,
+                markdown_strict, mediawiki, native, odt,
+                opendocument, opml, org, pdf*, plain, revealjs,
+                rst, rtf, s5, slideous, slidy, texinfo, textile
+                [*for pdf output, use latex or beamer and -o FILENAME.pdf]</code></pre></li>
+</ul>
+</div>
+<div id="focus" class="slide section level1">
+<h1>Focus</h1>
+<ul>
+<li>markdown</li>
+<li>html</li>
+<li>A touch of json</li>
+<li>Easy of scripting</li>
+<li>Pandoc was used to make these slides</li>
+</ul>
+</div>
+<div id="markdown-to-html" class="slide section level1">
+<h1>markdown to html</h1>
+<div class="groupCodeBlock">
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu">## hi</span>
+
+This is text and <span class="ot">[this is a link.](http://www.example.com)</span></code></pre>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;h2</span><span class="ot"> id=</span><span class="st">&quot;hi&quot;</span><span class="kw">&gt;</span>hi<span class="kw">&lt;/h2&gt;</span>
+<span class="kw">&lt;p&gt;</span>This is text and <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;http://www.example.com&quot;</span><span class="kw">&gt;</span>this is a link.<span class="kw">&lt;/a&gt;&lt;/p&gt;</span></code></pre>
+</div>
+<p>When rendered:</p>
+<h2 id="hi">hi</h2>
+<p>This is text and <a href="http://www.example.com">this is a link.</a></p>
+</div>
+<div id="more" class="slide section level1">
+<h1>More</h1>
+<div class="groupCodeBlock">
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu">## This is a list</span>
+
+* <span class="fl">item one</span>
+* <span class="fl">item two</span></code></pre>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;h2</span><span class="ot"> id=</span><span class="st">&quot;this-is-a-list&quot;</span><span class="kw">&gt;</span>This is a list<span class="kw">&lt;/h2&gt;</span>
+<span class="kw">&lt;ul&gt;</span>
+<span class="kw">&lt;li&gt;</span>item one<span class="kw">&lt;/li&gt;</span>
+<span class="kw">&lt;li&gt;</span>item two<span class="kw">&lt;/li&gt;</span>
+<span class="kw">&lt;/ul&gt;</span></code></pre>
+</div>
+<p>rendered:</p>
+<h2 id="this-is-a-list">This is a list</h2>
+<ul>
+<li>item one</li>
+<li>item two</li>
+</ul>
+</div>
+<div id="easy-of-use" class="slide section level1">
+<h1>Easy of use</h1>
+<ul>
+<li>Less verbose then html, json, man, opml, epub, etc.
+<ul>
+<li>Write in what you know convert to what you do not.</li>
+<li>Still recoment markdown ubiquity.</li>
+</ul></li>
+<li>Flexible and scriptible</li>
+<li>Who has the time to learn all of these formats? Epessially if you want content in multiple formats.</li>
+</ul>
+</div>
+<div id="who-has-the-time-markdown---html" class="slide section level1">
+<h1>Who has the time? markdown -&gt; html</h1>
+<div class="groupCodeBlock">
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu">## This is a list</span>
+
+* <span class="fl">item one</span>
+* <span class="fl">item two</span></code></pre>
+<pre class="sourceCode markdown"><code class="sourceCode markdown">&lt;h2 id=&quot;this-is-a-list&quot;&gt;This is a list&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;item one&lt;/li&gt;
+&lt;li&gt;item two&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+</div>
+<div id="who-has-the-time-markdown---asciidoc" class="slide section level1">
+<h1>Who has the time? markdown -&gt; asciidoc</h1>
+<div class="groupCodeBlock">
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu">## This is a list</span>
+
+* <span class="fl">item one</span>
+* <span class="fl">item two</span></code></pre>
+<pre class="asciidoc"><code>[[this-is-a-list]]
+This is a list
+~~~~~~~~~~~~~~
+
+* item one
+* item two
+
+</code></pre>
+</div>
+</div>
+<div id="who-has-the-time-markdown---docbook" class="slide section level1">
+<h1>Who has the time? markdown -&gt; docbook</h1>
+<div class="groupCodeBlock">
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu">## This is a list</span>
+
+* <span class="fl">item one</span>
+* <span class="fl">item two</span></code></pre>
+<pre class="docbook"><code>&lt;sect1 id=&quot;this-is-a-list&quot;&gt;
+  &lt;title&gt;This is a list&lt;/title&gt;
+  &lt;itemizedlist spacing=&quot;compact&quot;&gt;
+    &lt;listitem&gt;
+      &lt;para&gt;
+        item one
+      &lt;/para&gt;
+    &lt;/listitem&gt;
+    &lt;listitem&gt;
+      &lt;para&gt;
+        item two
+      &lt;/para&gt;
+    &lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/sect1&gt;
+</code></pre>
+</div>
+</div>
+<div id="who-has-the-time-markdown---latex" class="slide section level1">
+<h1>Who has the time? markdown -&gt; latex</h1>
+<div class="groupCodeBlock">
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu">## This is a list</span>
+
+* <span class="fl">item one [link](http://www.example.com]</span>
+* <span class="fl">item two</span></code></pre>
+<pre class="sourceCode latex"><code class="sourceCode latex">\subsection{This is a list}\label{this-is-a-list}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  item one {[}link{]}(http://www.example.com{]}
+\item
+  item two
+\end{itemize}</code></pre>
+</div>
+</div>
+<div id="who-has-the-time-markdown---json" class="slide section level1">
+<h1>Who has the time? markdown -&gt; json</h1>
+<div class="groupCodeBlock">
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu">## This is a list</span>
+
+* <span class="fl">item one</span>
+* <span class="fl">item two</span></code></pre>
+<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span><span class="fu">{</span><span class="dt">&quot;unMeta&quot;</span><span class="fu">:{}}</span><span class="ot">,[</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Header&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="dv">2</span><span class="ot">,[</span><span class="st">&quot;this-is-a-list&quot;</span><span class="ot">,[],[]],[</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Str&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="st">&quot;This&quot;</span><span class="fu">}</span><span class="ot">,</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Space&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="ot">[]</span><span class="fu">}</span><span class="ot">,</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Str&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="st">&quot;is&quot;</span><span class="fu">}</span><span class="ot">,</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Space&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="ot">[]</span><span class="fu">}</span><span class="ot">,</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Str&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="st">&quot;a&quot;</span><span class="fu">}</span><span class="ot">,</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Space&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="ot">[]</span><span class="fu">}</span><span class="ot">,</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Str&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="st">&quot;list&quot;</span><span class="fu">}</span><span class="ot">]]</span><span class="fu">}</span><span class="ot">,</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;BulletList&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="ot">[[</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Plain&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Str&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="st">&quot;item&quot;</span><span class="fu">}</span><span class="ot">,</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Space&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="ot">[]</span><span class="fu">}</span><span class="ot">,</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Str&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="st">&quot;one&quot;</span><span class="fu">}</span><span class="ot">]</span><span class="fu">}</span><span class="ot">],[</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Plain&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Str&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="st">&quot;item&quot;</span><span class="fu">}</span><span class="ot">,</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Space&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="ot">[]</span><span class="fu">}</span><span class="ot">,</span><span class="fu">{</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="st">&quot;Str&quot;</span><span class="fu">,</span><span class="dt">&quot;c&quot;</span><span class="fu">:</span><span class="st">&quot;two&quot;</span><span class="fu">}</span><span class="ot">]</span><span class="fu">}</span><span class="ot">]]</span><span class="fu">}</span><span class="ot">]]</span></code></pre>
+</div>
+<p>This can represent all of pandoc's internal AST.</p>
+</div>
+<div id="who-has-the-time-markdown---etc" class="slide section level1">
+<h1>Who has the time? markdown -&gt; etc</h1>
+<pre><code>Output formats: asciidoc, beamer, context, docbook, docx,
+                dzslides, epub, epub3, fb2, html, html5, icml,
+                json, latex, man, markdown, markdown_github,
+                markdown_mmd, markdown_phpextra,
+                markdown_strict, mediawiki, native, odt,
+                opendocument, opml, org, pdf*, plain, revealjs,
+                rst, rtf, s5, slideous, slidy, texinfo, textile
+                [*for pdf output, use latex or beamer and -o FILENAME.pdf]</code></pre>
+</div>
+<div id="scriptablity" class="slide section level1">
+<h1>Scriptablity</h1>
+<p>Since it is easy to out the internal AST it is simple to filter and edit the AST and send it along to other formats.</p>
+<p>In fact that is what I have been doing for all of my little converstion examples. I would have been too lazy to copy and paste all of the converstions you have seen so far.</p>
+<p>So instead I made a small haskell script to access and filter pandoc AST with command line commands.</p>
+</div>
+<div id="scriptablity-cli" class="slide section level1">
+<h1>Scriptablity CLI</h1>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"> ```{ cmdBlock=&quot;pandoc -t html5&quot; inClasses=&quot;markdown&quot; outClasses=&quot;html5&quot;}
+ ## This is a h2 header
+ ```</code></pre>
+<p>becomes:</p>
+<div class="groupCodeBlock">
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu">## This is a h2 header</span></code></pre>
+<pre class="html5"><code>&lt;h2 id=&quot;this-is-a-h2-header&quot;&gt;This is a h2 header&lt;/h2&gt;
+</code></pre>
+</div>
+</div>
+<div id="scriptablity-cli---ls" class="slide section level1">
+<h1>Scriptablity CLI - ls</h1>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"> ```{ showCmdBlock=&quot;ls -l&quot; outClasses=&quot;bashOut&quot;}
+ ## This is a h2 header
+ ```</code></pre>
+<p>becomes:</p>
+<div class="groupCodeBlock">
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span> -l</code></pre>
+<div class="groupCodeBlock">
+
+<pre class="bashOut"><code>total 3144
+-rw-r--r-- 1 pjw users  206358 Jun  8 13:07 a.svg
+drwxr-xr-x 7 pjw users    4096 Jun  6 10:11 blogging
+-rw-r--r-- 1 pjw users   11654 Jun  7 03:09 chicago-author-date.csl
+-rw-r--r-- 1 pjw users   11654 Jun  6 23:43 chicago-author-date.csl.orig
+-rw-r--r-- 1 pjw users   20916 Jun  8 13:07 circle.svg
+-rw-r--r-- 1 pjw users    3080 Jun  8 15:36 diaExample.svg
+-rw-r--r-- 1 pjw users   61550 Jun  8 15:36 dotExample.png
+-rwxr-xr-x 1 pjw users 2374623 Jun  6 09:36 e
+-rw-r--r-- 1 pjw users   14801 Jun  6 09:01 e.png
+-rw-r--r-- 1 pjw users  206374 Jun  6 21:05 e.svg
+-rw-r--r-- 1 pjw users    4284 Jan  9  2013 ghcFromSource.md
+-rw-r--r-- 1 pjw users    6741 Jun  8 00:50 hello.png
+-rw-r--r-- 1 pjw users    7758 Jan 16  2013 lazy.md
+drwxr-xr-x 2 pjw users    4096 Jun  6 10:08 log
+-rw-r--r-- 1 pjw users     488 Mar 14  2013 nixCommandLineHelpers.txt
+-rw-r--r-- 1 pjw users    2873 Apr 12  2013 nixHackage.md
+-rw-r--r-- 1 pjw users   15734 Jun  8 13:07 nix.html
+-rw-r--r-- 1 pjw users    8864 Jun  8 13:07 nix.md
+drwxr-xr-x 2 pjw users    4096 Jun  6 10:03 noteLog
+-rwxr-xr-x 1 pjw users    1241 Jun  8 15:02 pandocCmdFilter.hs
+-rwxr-xr-x 1 pjw users     415 Jun  8 10:35 pandocDebugFilter.hs
+-rwxr-xr-x 1 pjw users    1179 Jun  8 02:00 pandocDotFilter.hs
+-rwxr-xr-x 1 pjw users     481 Jun  8 14:45 pandocJsonFormatterFilter.hs
+-rw-r--r-- 1 pjw users     362 Jun  7 03:12 pandocmarkdown.bib
+-rwxr-xr-x 1 pjw users     721 Jun  8 06:01 pandocShowFilter.hs
+-rw-r--r-- 1 pjw users     246 Dec 18  2012 paper2.md
+-rw-r--r-- 1 pjw users    1691 Jun  8 13:07 sc2.svg
+-rw-r--r-- 1 pjw users    3824 Jun  8 13:07 sc3.svg
+-rw-r--r-- 1 pjw users    4123 Jun  8 13:07 sc4.svg
+-rw-r--r-- 1 pjw users    1383 Jun  8 13:07 sc5.svg
+-rw-r--r-- 1 pjw users   27509 Jun  8 13:07 sc6.svg
+-rw-r--r-- 1 pjw users    4104 Jun  8 13:07 sc7.svg
+-rw-r--r-- 1 pjw users    8120 Jun  8 13:07 sc8.svg
+-rw-r--r-- 1 pjw users    3105 Jun  8 15:24 sc.svg
+-rw-r--r-- 1 pjw users      61 Jun  8 13:06 test.css
+-rw-r--r-- 1 pjw users   24725 Jun  8 15:36 testDebugFilter.html
+-rw-r--r-- 1 pjw users    6034 Jun  8 15:37 testDebugFilter.md
+-rw-r--r-- 1 pjw users    1714 Jun  8 01:01 testDotfilter.html
+-rw-r--r-- 1 pjw users     626 Jun  8 01:01 testDotFilter.html
+-rw-r--r-- 1 pjw users     136 Jun  8 01:01 testDotFilter.md
+-rw-r--r-- 1 pjw users    6741 Jun  8 01:01 testDot.png
+-rw-r--r-- 1 pjw users    1547 Jun 21  2013 testLeftD.hs
+-rw-r--r-- 1 pjw users    4745 Jun  7 00:33 test.md
+-rw-r--r-- 1 pjw users     681 Jun  8 15:36 tmp.dot
+-rw-r--r-- 1 pjw users    4740 Jun  6 09:01 tmp.hi
+-rw-r--r-- 1 pjw users     380 Jun  8 15:36 tmp.hs
+-rw-r--r-- 1 pjw users    8280 Jun  6 09:36 tmp.o
+drwxr-xr-x 2 pjw users    4096 Jun  6 10:03 todo
+-rw-r--r-- 1 pjw users    2531 Jun 21  2013 turnRelectBugs.hs
+drwxr-xr-x 4 pjw users    4096 Mar 30  2013 typeAnnotations
+</code></pre>
+</div>
+</div>
+</div>
+<div id="filters" class="slide section level1">
+<h1>Filters</h1>
+<ul>
+<li>Pattern match on datatype
+<ul>
+<li>Paragraph</li>
+<li>CodeBlock</li>
+<li>BlockQuote</li>
+<li>Ordered List</li>
+<li><a href="http://hackage.haskell.org/package/pandoc-types-1.12.3.3/docs/Text-Pandoc-Definition.html#t:Block">etc, more at hackage page</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="command-line-filter" class="slide section level1">
+<h1>Command Line Filter</h1>
+<p>To inport a file with highlighting:</p>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"> ```{ cmdBlock=&quot;cat pandocCmdFilter.hs&quot; outClasses=&quot;haskell&quot;}
+ ```</code></pre>
+<div class="groupCodeBlock">
+
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="st">#!/usr/bin/env runhaskell</span>
+<span class="co">-- behead2.hs</span>
+<span class="kw">import </span><span class="dt">Text.Pandoc.JSON</span>
+
+<span class="kw">import </span><span class="dt">System.Process</span>
+
+<span class="kw">import </span><span class="dt">Data.Monoid</span>
+<span class="kw">import </span><span class="dt">Data.List</span> (find)
+
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> toJSONFilter handleCmds
+
+<span class="ot">handleCmds ::</span> <span class="dt">Block</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> <span class="dt">Block</span>
+handleCmds (<span class="dt">CodeBlock</span> (ident, [] , ((<span class="st">&quot;showCmdBlock&quot;</span>,cmd0)<span class="fu">:</span>attrs)) code) <span class="fu">=</span> <span class="kw">do</span>
+    cmdBlock <span class="ot">&lt;-</span> handleCmds <span class="fu">$</span> <span class="dt">CodeBlock</span> (ident, [], ((<span class="st">&quot;cmdBlock&quot;</span>,cmd0)<span class="fu">:</span>attrs)) code
+    return <span class="fu">$</span> <span class="dt">Div</span> (<span class="st">&quot;&quot;</span>, [<span class="st">&quot;groupCodeBlock&quot;</span>], [])
+                 [ <span class="dt">CodeBlock</span> (ident, [<span class="st">&quot;bash&quot;</span>], []) <span class="fu">$</span> <span class="st">&quot;$ &quot;</span> <span class="fu">&lt;&gt;</span> cmd0
+                 , cmdBlock
+                 ]
+handleCmds (<span class="dt">CodeBlock</span> (ident, [] , ((<span class="st">&quot;cmdBlock&quot;</span>,cmd0)<span class="fu">:</span>attrs)) code) <span class="fu">=</span> <span class="kw">do</span>
+    <span class="kw">let</span> (cmd<span class="fu">:</span>args) <span class="fu">=</span> words cmd0
+    <span class="kw">let</span> outClasses <span class="fu">=</span>
+              words
+            <span class="fu">.</span> maybe [] snd
+            <span class="fu">.</span> find ((<span class="fu">==</span> <span class="st">&quot;outClasses&quot;</span>) <span class="fu">.</span> fst)
+            <span class="fu">$</span> attrs
+    <span class="kw">let</span> inClasses <span class="fu">=</span>
+              words
+            <span class="fu">.</span> maybe [] snd
+            <span class="fu">.</span> find ((<span class="fu">==</span> <span class="st">&quot;inClasses&quot;</span>) <span class="fu">.</span> fst)
+            <span class="fu">$</span> attrs
+    <span class="kw">let</span> inputBlock <span class="fu">=</span>
+            <span class="kw">if</span> null code
+            <span class="kw">then</span> <span class="dt">Null</span>
+            <span class="kw">else</span> <span class="dt">CodeBlock</span> (ident, inClasses, []) code
+    result <span class="ot">&lt;-</span> readProcess cmd args code
+    return <span class="fu">$</span> <span class="dt">Div</span> (<span class="st">&quot;&quot;</span>, [<span class="st">&quot;groupCodeBlock&quot;</span>], [])
+                 [ inputBlock
+                 , <span class="dt">CodeBlock</span> (ident, outClasses, []) result
+                 ]
+handleCmds x <span class="fu">=</span> return x
+</code></pre>
+</div>
+</div>
+<div id="graphviz---inline-dot-files" class="slide section level1">
+<h1>GraphViz - Inline dot files</h1>
+<p><img src="dotExample.png" title="test title" alt="test" /></p>
+</div>
+<div id="inline-diagrams-code" class="slide section level1">
+<h1>Inline Diagrams Code</h1>
+<div>
+<pre class="sourceCode haskell" outFile="./diaExample.svg"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE NoMonomorphismRestriction #-}</span>
+<span class="kw">import </span><span class="dt">Diagrams.Prelude</span>
+<span class="kw">import </span><span class="dt">Diagrams.TwoD</span>
+<span class="kw">import </span><span class="dt">Diagrams.Backend.SVG</span>
+<span class="kw">import </span><span class="dt">Data.List</span>
+
+example <span class="fu">=</span> hrule (<span class="dv">2</span> <span class="fu">*</span> sum sizes) <span class="fu">===</span> circles <span class="st"># centerX</span>
+  <span class="kw">where</span> circles <span class="fu">=</span> hcat <span class="fu">.</span> map alignT <span class="fu">.</span> zipWith scale sizes
+                <span class="fu">$</span> repeat (circle <span class="dv">1</span>)
+        sizes   <span class="fu">=</span> [<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">3</span>]
+
+main <span class="fu">=</span> renderSVG <span class="st">&quot;diaExample.svg&quot;</span> (<span class="dt">Width</span> <span class="dv">500</span>)  (example <span class="st"># lw 0.2)</span></code></pre>
+<p><img src="./diaExample.svg" title="test title" alt="test" /></p>
+</div>
+</div>
+<div id="easy-of-use-scriptablity" class="slide section level1">
+<h1>Easy of use + Scriptablity</h1>
+<ul>
+<li>Pleanty of examples of scriptin Pandoc in:
+<ul>
+<li>Haskell</li>
+<li>Python</li>
+<li>Perl</li>
+<li>others</li>
+<li>If you can handle JSON you can script Pandoc</li>
+</ul></li>
+<li>Go forth and create and customize.</li>
+</ul>
+</div>
+</body>
+</html>

@@ -1,15 +1,7 @@
----
-author:
-- Patrick Wheeler
-date: June 8 2014
-title: Quick Scriptable Markdown with Pandoc
-...
-
 Swiss Arm Knife Converstion Tool
 ================================
 
--   Pandoc is can be used to convert between a number of markdown and
-    markup file formats
+-   Pandoc is can be used to convert between a number of markdown and markup file formats
 
         Input formats:  docbook, haddock, html, json, latex, markdown,
                         markdown_github, markdown_mmd,
@@ -36,8 +28,6 @@ Focus
 markdown to html
 ================
 
-<div class="groupCodeBlock">
-
 ``` {.markdown}
 ## hi
 
@@ -49,8 +39,6 @@ This is text and [this is a link.](http://www.example.com)
 <p>This is text and <a href="http://www.example.com">this is a link.</a></p>
 ```
 
-</div>
-
 When rendered:
 
 hi
@@ -60,8 +48,6 @@ This is text and [this is a link.](http://www.example.com)
 
 More
 ====
-
-<div class="groupCodeBlock">
 
 ``` {.markdown}
 ## This is a list
@@ -77,8 +63,6 @@ More
 <li>item two</li>
 </ul>
 ```
-
-</div>
 
 rendered:
 
@@ -95,13 +79,10 @@ Easy of use
     -   Write in what you know convert to what you do not.
     -   Still recoment markdown ubiquity.
 -   Flexible and scriptible
--   Who has the time to learn all of these formats? Epessially if you
-    want content in multiple formats.
+-   Who has the time to learn all of these formats? Epessially if you want content in multiple formats.
 
 Who has the time? markdown -\> html
 ===================================
-
-<div class="groupCodeBlock">
 
 ``` {.markdown}
 ## This is a list
@@ -118,12 +99,8 @@ Who has the time? markdown -\> html
 </ul>
 ```
 
-</div>
-
 Who has the time? markdown -\> asciidoc
 =======================================
-
-<div class="groupCodeBlock">
 
 ``` {.markdown}
 ## This is a list
@@ -142,12 +119,8 @@ This is a list
 
 ```
 
-</div>
-
 Who has the time? markdown -\> docbook
 ======================================
-
-<div class="groupCodeBlock">
 
 ``` {.markdown}
 ## This is a list
@@ -174,12 +147,8 @@ Who has the time? markdown -\> docbook
 </sect1>
 ```
 
-</div>
-
 Who has the time? markdown -\> latex
 ====================================
-
-<div class="groupCodeBlock">
 
 ``` {.markdown}
 ## This is a list
@@ -200,12 +169,8 @@ Who has the time? markdown -\> latex
 \end{itemize}
 ```
 
-</div>
-
 Who has the time? markdown -\> json
 ===================================
-
-<div class="groupCodeBlock">
 
 ``` {.markdown}
 ## This is a list
@@ -217,8 +182,6 @@ Who has the time? markdown -\> json
 ``` {.json}
 [{"unMeta":{}},[{"t":"Header","c":[2,["this-is-a-list",[],[]],[{"t":"Str","c":"This"},{"t":"Space","c":[]},{"t":"Str","c":"is"},{"t":"Space","c":[]},{"t":"Str","c":"a"},{"t":"Space","c":[]},{"t":"Str","c":"list"}]]},{"t":"BulletList","c":[[{"t":"Plain","c":[{"t":"Str","c":"item"},{"t":"Space","c":[]},{"t":"Str","c":"one"}]}],[{"t":"Plain","c":[{"t":"Str","c":"item"},{"t":"Space","c":[]},{"t":"Str","c":"two"}]}]]}]]
 ```
-
-</div>
 
 This can represent all of pandoc's internal AST.
 
@@ -237,15 +200,11 @@ Who has the time? markdown -\> etc
 Scriptablity
 ============
 
-Since it is easy to out the internal AST it is simple to filter and edit
-the AST and send it along to other formats.
+Since it is easy to out the internal AST it is simple to filter and edit the AST and send it along to other formats.
 
-In fact that is what I have been doing for all of my little converstion
-examples. I would have been too lazy to copy and paste all of the
-converstions you have seen so far.
+In fact that is what I have been doing for all of my little converstion examples. I would have been too lazy to copy and paste all of the converstions you have seen so far.
 
-So instead I made a small haskell script to access and filter pandoc AST
-with command line commands.
+So instead I made a small haskell script to access and filter pandoc AST with command line commands.
 
 Scriptablity CLI
 ================
@@ -258,8 +217,6 @@ Scriptablity CLI
 
 becomes:
 
-<div class="groupCodeBlock">
-
 ``` {.markdown}
 ## This is a h2 header
 ```
@@ -267,8 +224,6 @@ becomes:
 ``` {.html5}
 <h2 id="this-is-a-h2-header">This is a h2 header</h2>
 ```
-
-</div>
 
 Scriptablity CLI - ls
 =====================
@@ -281,27 +236,24 @@ Scriptablity CLI - ls
 
 becomes:
 
-<div class="groupCodeBlock">
-
 ``` {.bash}
 $ ls -l
 ```
 
-<div class="groupCodeBlock">
-
 ``` {.bashOut}
-total 116
--rw-r--r-- 1 pjw users 24725 Jun 11 01:52 20140608-Science-Sunday.html
--rw-r--r-- 1 pjw users  6106 Jun 11 14:15 20140608-Science-Sunday.md
--rw-r--r-- 1 pjw users  3080 Jun 11 14:12 diaExample.svg
--rw-r--r-- 1 pjw users 61550 Jun 11 14:12 dotExample.png
--rwxr-xr-x 1 pjw users  1241 Jun 11 14:19 pandocCmdFilter.hs
--rw-r--r-- 1 pjw users  6106 Jun 11 01:52 README.md
+total 2548
+-rw-r--r-- 1 pjw users   24725 Jun 11 01:52 20140608-Science-Sunday.html
+-rw-r--r-- 1 pjw users    6106 Jun 11 14:15 20140608-Science-Sunday.md
+-rw-r--r-- 1 pjw users    3080 Jun 11 14:20 diaExample.svg
+-rw-r--r-- 1 pjw users   61550 Jun 11 14:19 dotExample.png
+-rwxr-xr-x 1 pjw users    1241 Jun 11 14:19 pandocCmdFilter.hs
+-rw-r--r-- 1 pjw users    8926 Jun 11 14:20 README.md
+-rwxr-xr-x 1 pjw users 2411446 Jun 11 14:20 tmp
+-rw-r--r-- 1 pjw users     681 Jun 11 14:19 tmp.dot
+-rw-r--r-- 1 pjw users   17809 Jun 11 14:20 tmp.hi
+-rw-r--r-- 1 pjw users     380 Jun 11 14:19 tmp.hs
+-rw-r--r-- 1 pjw users   41544 Jun 11 14:20 tmp.o
 ```
-
-</div>
-
-</div>
 
 Filters
 =======
@@ -311,10 +263,8 @@ Filters
     -   CodeBlock
     -   BlockQuote
     -   Ordered List
-    -   [etc, more at hackage
-        page](http://hackage.haskell.org/package/pandoc-types-1.12.3.3/docs/Text-Pandoc-Definition.html#t:Block)
--   Then transform and preform IO actions to create a new Block
-    datatype.
+    -   [etc, more at hackage page](http://hackage.haskell.org/package/pandoc-types-1.12.3.3/docs/Text-Pandoc-Definition.html#t:Block)
+-   Then transform and preform IO actions to create a new Block datatype.
 
 Command Line Filter
 ===================
@@ -325,8 +275,6 @@ To inport a file with highlighting:
  ```{ cmdBlock="cat pandocCmdFilter.hs" outClasses="haskell"}
  ```
 ```
-
-<div class="groupCodeBlock">
 
 ``` {.haskell}
 #!/usr/bin/env runhaskell
@@ -373,8 +321,6 @@ handleCmds x = return x
 
 ```
 
-</div>
-
 GraphViz - Inline dot files
 ===========================
 
@@ -382,8 +328,6 @@ GraphViz - Inline dot files
 
 Inline Diagrams Code
 ====================
-
-<div>
 
 ``` {.haskell outFile="./diaExample.svg"}
 {-# LANGUAGE NoMonomorphismRestriction #-}
@@ -401,8 +345,6 @@ main = renderSVG "diaExample.svg" (Width 500)  (example # lw 0.2)
 ```
 
 ![test](./diaExample.svg "test title")
-
-</div>
 
 Easy of use + Scriptablity
 ==========================

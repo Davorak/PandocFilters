@@ -1,4 +1,5 @@
-Below is the presentation in markdown_github format.
+Below is the presentation in markdown_github format. To view as slide show by
+use of rawgithub.com [here](http://rawgit.com/Davorak/PandocFilters/master/20140608-Science-Sunday.html#(1)).
 
 Swiss Arm Knife Converstion Tool
 ================================

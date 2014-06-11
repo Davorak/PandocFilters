@@ -1,11 +1,15 @@
-% Quick Scriptable Markdown with Pandoc
-% Patrick Wheeler
-% June 8 2014
+---
+author:
+- Patrick Wheeler
+date: June 8 2014
+title: Quick Scriptable Markdown with Pandoc
+...
 
-# Swiss Arm Knife Converstion Tool
+Swiss Arm Knife Converstion Tool
+================================
 
-* Pandoc is can be used to convert between a number of markdown and markup file
-formats
+-   Pandoc is can be used to convert between a number of markdown and
+    markup file formats
 
         Input formats:  docbook, haddock, html, json, latex, markdown,
                         markdown_github, markdown_mmd,
@@ -20,110 +24,206 @@ formats
                         rst, rtf, s5, slideous, slidy, texinfo, textile
                         [*for pdf output, use latex or beamer and -o FILENAME.pdf]
 
-# Focus
+Focus
+=====
 
-- markdown
-- html
-- A touch of json
-- Easy of scripting
-- Pandoc was used to make these slides
+-   markdown
+-   html
+-   A touch of json
+-   Easy of scripting
+-   Pandoc was used to make these slides
 
+markdown to html
+================
 
-# markdown to html
+<div class="groupCodeBlock">
 
-```{ cmdBlock="pandoc -t html5" inClasses="markdown" outClasses="html"}
+``` {.markdown}
 ## hi
 
 This is text and [this is a link.](http://www.example.com)
 ```
+
+``` {.html}
+<h2 id="hi">hi</h2>
+<p>This is text and <a href="http://www.example.com">this is a link.</a></p>
+```
+
+</div>
 
 When rendered:
 
-## hi
+hi
+--
 
 This is text and [this is a link.](http://www.example.com)
 
+More
+====
 
-# More
+<div class="groupCodeBlock">
 
-```{ cmdBlock="pandoc -t html5" inClasses="markdown" outClasses="html"}
+``` {.markdown}
 ## This is a list
 
 * item one
 * item two
 ```
+
+``` {.html}
+<h2 id="this-is-a-list">This is a list</h2>
+<ul>
+<li>item one</li>
+<li>item two</li>
+</ul>
+```
+
+</div>
 
 rendered:
 
-## This is a list
+This is a list
+--------------
 
-* item one
-* item two
+-   item one
+-   item two
 
+Easy of use
+===========
 
-# Easy of use
+-   Less verbose then html, json, man, opml, epub, etc.
+    -   Write in what you know convert to what you do not.
+    -   Still recoment markdown ubiquity.
+-   Flexible and scriptible
+-   Who has the time to learn all of these formats? Epessially if you
+    want content in multiple formats.
 
-- Less verbose then html, json, man, opml, epub, etc.
-    * Write in what you know convert to what you do not.
-    * Still recoment markdown ubiquity.
-- Flexible and scriptible
-- Who has the time to learn all of these formats? Epessially if you want
-content in multiple formats.
+Who has the time? markdown -\> html
+===================================
 
+<div class="groupCodeBlock">
 
-# Who has the time? markdown -> html
-
-```{ cmdBlock="pandoc -t html" inClasses="markdown" outClasses="markdown"}
-## This is a list
-
-* item one
-* item two
-```
-
-
-# Who has the time? markdown -> asciidoc
-
-```{ cmdBlock="pandoc -t asciidoc" inClasses="markdown" outClasses="asciidoc"}
+``` {.markdown}
 ## This is a list
 
 * item one
 * item two
 ```
 
+``` {.markdown}
+<h2 id="this-is-a-list">This is a list</h2>
+<ul>
+<li>item one</li>
+<li>item two</li>
+</ul>
+```
 
-# Who has the time? markdown -> docbook
+</div>
 
-```{ cmdBlock="pandoc -t docbook" inClasses="markdown" outClasses="docbook"}
+Who has the time? markdown -\> asciidoc
+=======================================
+
+<div class="groupCodeBlock">
+
+``` {.markdown}
 ## This is a list
 
 * item one
 * item two
 ```
 
+``` {.asciidoc}
+[[this-is-a-list]]
+This is a list
+~~~~~~~~~~~~~~
 
-# Who has the time? markdown -> latex
+* item one
+* item two
 
-```{ cmdBlock="pandoc -t latex" inClasses="markdown" outClasses="latex"}
+```
+
+</div>
+
+Who has the time? markdown -\> docbook
+======================================
+
+<div class="groupCodeBlock">
+
+``` {.markdown}
+## This is a list
+
+* item one
+* item two
+```
+
+``` {.docbook}
+<sect1 id="this-is-a-list">
+  <title>This is a list</title>
+  <itemizedlist spacing="compact">
+    <listitem>
+      <para>
+        item one
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        item two
+      </para>
+    </listitem>
+  </itemizedlist>
+</sect1>
+```
+
+</div>
+
+Who has the time? markdown -\> latex
+====================================
+
+<div class="groupCodeBlock">
+
+``` {.markdown}
 ## This is a list
 
 * item one [link](http://www.example.com]
 * item two
 ```
 
+``` {.latex}
+\subsection{This is a list}\label{this-is-a-list}
 
-# Who has the time? markdown -> json
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  item one {[}link{]}(http://www.example.com{]}
+\item
+  item two
+\end{itemize}
+```
 
-```{ cmdBlock="pandoc -t json" inClasses="markdown" outClasses="json"}
+</div>
+
+Who has the time? markdown -\> json
+===================================
+
+<div class="groupCodeBlock">
+
+``` {.markdown}
 ## This is a list
 
 * item one
 * item two
 ```
 
+``` {.json}
+[{"unMeta":{}},[{"t":"Header","c":[2,["this-is-a-list",[],[]],[{"t":"Str","c":"This"},{"t":"Space","c":[]},{"t":"Str","c":"is"},{"t":"Space","c":[]},{"t":"Str","c":"a"},{"t":"Space","c":[]},{"t":"Str","c":"list"}]]},{"t":"BulletList","c":[[{"t":"Plain","c":[{"t":"Str","c":"item"},{"t":"Space","c":[]},{"t":"Str","c":"one"}]}],[{"t":"Plain","c":[{"t":"Str","c":"item"},{"t":"Space","c":[]},{"t":"Str","c":"two"}]}]]}]]
+```
+
+</div>
+
 This can represent all of pandoc's internal AST.
 
-# Who has the time? markdown -> etc
-
+Who has the time? markdown -\> etc
+==================================
 
     Output formats: asciidoc, beamer, context, docbook, docx,
                     dzslides, epub, epub3, fb2, html, html5, icml,
@@ -134,23 +234,23 @@ This can represent all of pandoc's internal AST.
                     rst, rtf, s5, slideous, slidy, texinfo, textile
                     [*for pdf output, use latex or beamer and -o FILENAME.pdf]
 
+Scriptablity
+============
 
-# Scriptablity
-
-Since it is easy to out the internal AST it is simple to filter and edit the AST
-and send it along to other formats.
+Since it is easy to out the internal AST it is simple to filter and edit
+the AST and send it along to other formats.
 
 In fact that is what I have been doing for all of my little converstion
-examples. I would have been too lazy to copy and paste all of the converstions
-you have seen so far.
+examples. I would have been too lazy to copy and paste all of the
+converstions you have seen so far.
 
-So instead I made a small haskell script to access and filter pandoc AST with
-command line commands.
+So instead I made a small haskell script to access and filter pandoc AST
+with command line commands.
 
+Scriptablity CLI
+================
 
-# Scriptablity CLI
-
-```{ .markdown }
+``` {.markdown}
  ```{ cmdBlock="pandoc -t html5" inClasses="markdown" outClasses="html5"}
  ## This is a h2 header
  ```
@@ -158,13 +258,22 @@ command line commands.
 
 becomes:
 
-```{ cmdBlock="pandoc -t html5" inClasses="markdown" outClasses="html5"}
+<div class="groupCodeBlock">
+
+``` {.markdown}
 ## This is a h2 header
 ```
 
-# Scriptablity CLI - ls
+``` {.html5}
+<h2 id="this-is-a-h2-header">This is a h2 header</h2>
+```
 
-```{ .markdown }
+</div>
+
+Scriptablity CLI - ls
+=====================
+
+``` {.markdown}
  ```{ showCmdBlock="ls -l" outClasses="bashOut"}
  ## This is a h2 header
  ```
@@ -172,67 +281,111 @@ becomes:
 
 becomes:
 
-```{ showCmdBlock="ls -l" outClasses="bashOut"}
+<div class="groupCodeBlock">
+
+``` {.bash}
+$ ls -l
 ```
 
-# Filters
+<div class="groupCodeBlock">
 
-- Pattern match on datatype
-    * Paragraph
-    * CodeBlock
-    * BlockQuote
-    * Ordered List
-    * [etc, more at hackage page](http://hackage.haskell.org/package/pandoc-types-1.12.3.3/docs/Text-Pandoc-Definition.html#t:Block)
-- Then transform and preform IO actions to create a new Block datatype.
+``` {.bashOut}
+total 116
+-rw-r--r-- 1 pjw users 24725 Jun 11 01:52 20140608-Science-Sunday.html
+-rw-r--r-- 1 pjw users  6106 Jun 11 14:15 20140608-Science-Sunday.md
+-rw-r--r-- 1 pjw users  3080 Jun 11 14:12 diaExample.svg
+-rw-r--r-- 1 pjw users 61550 Jun 11 14:12 dotExample.png
+-rwxr-xr-x 1 pjw users  1241 Jun 11 14:19 pandocCmdFilter.hs
+-rw-r--r-- 1 pjw users  6106 Jun 11 01:52 README.md
+```
 
+</div>
 
-# Command Line Filter
+</div>
+
+Filters
+=======
+
+-   Pattern match on datatype
+    -   Paragraph
+    -   CodeBlock
+    -   BlockQuote
+    -   Ordered List
+    -   [etc, more at hackage
+        page](http://hackage.haskell.org/package/pandoc-types-1.12.3.3/docs/Text-Pandoc-Definition.html#t:Block)
+-   Then transform and preform IO actions to create a new Block
+    datatype.
+
+Command Line Filter
+===================
 
 To inport a file with highlighting:
-```{ .markdown }
+
+``` {.markdown}
  ```{ cmdBlock="cat pandocCmdFilter.hs" outClasses="haskell"}
  ```
 ```
 
-```{ cmdBlock="cat pandocCmdFilter.hs" outClasses="haskell"}
+<div class="groupCodeBlock">
+
+``` {.haskell}
+#!/usr/bin/env runhaskell
+-- behead2.hs
+import Text.Pandoc.JSON
+
+import System.Process
+
+import Data.Monoid
+import Data.List (find)
+
+main :: IO ()
+main = toJSONFilter handleCmds
+
+handleCmds :: Block -> IO Block
+handleCmds (CodeBlock (ident, [] , (("showCmdBlock",cmd0):attrs)) code) = do
+    cmdBlock <- handleCmds $ CodeBlock (ident, [], (("cmdBlock",cmd0):attrs)) code
+    return $ Div ("", ["groupCodeBlock"], [])
+                 [ CodeBlock (ident, ["bash"], []) $ "$ " <> cmd0
+                 , cmdBlock
+                 ]
+handleCmds (CodeBlock (ident, [] , (("cmdBlock",cmd0):attrs)) code) = do
+    let (cmd:args) = words cmd0
+    let outClasses =
+              words
+            . maybe [] snd
+            . find ((== "outClasses") . fst)
+            $ attrs
+    let inClasses =
+              words
+            . maybe [] snd
+            . find ((== "inClasses") . fst)
+            $ attrs
+    let inputBlock =
+            if null code
+            then Null
+            else CodeBlock (ident, inClasses, []) code
+    result <- readProcess cmd args code
+    return $ Div ("", ["groupCodeBlock"], [])
+                 [ inputBlock
+                 , CodeBlock (ident, outClasses, []) result
+                 ]
+handleCmds x = return x
+
 ```
 
-# GraphViz - Inline dot files
+</div>
 
-```{ .showDot outFile="dotExample.png" }
-digraph test {
-    initState [label="0"]
-    evens     [label="evens=[2,4..10]"]
-    odds      [label="odds=[1,3..13]"]
-    plus      [label="plus = evens + odds"]
-    minus     [label="minus = evens - odds"]
-    all       [label="all = [1..]"]
-    a         [label="a = plus + minus"]
-    b         [label="b = a + feedback"]
-    f         [label="f = b * all"]
-    fin       [label="fin = (f, a)"]
+GraphViz - Inline dot files
+===========================
 
-    evens -> plus
-    odds  -> plus
-    evens -> minus
-    odds  -> minus
-    all   -> f
-    plus  -> a
-    minus  -> a
+![test](dotExample.png "test title")
 
-    initState -> b [style=dotted,label="Initial State"]
+Inline Diagrams Code
+====================
 
-    a -> b
-    f -> b    [style=dotted,label="State Feedback"];
-    b -> f
-    f -> fin
-    a -> fin
-}
-```
+<div>
 
-# Inline Diagrams Code
-
-```{ .diagram .haskell outFile="./diaExample.svg" }
+``` {.haskell outFile="./diaExample.svg"}
 {-# LANGUAGE NoMonomorphismRestriction #-}
 import Diagrams.Prelude
 import Diagrams.TwoD
@@ -247,13 +400,17 @@ example = hrule (2 * sum sizes) === circles # centerX
 main = renderSVG "diaExample.svg" (Width 500)  (example # lw 0.2)
 ```
 
+![test](./diaExample.svg "test title")
 
-# Easy of use + Scriptablity
+</div>
 
-- Pleanty of examples of scriptin Pandoc in:
-    * Haskell
-    * Python
-    * Perl
-    * others
-    * If you can handle JSON you can script Pandoc
-- Go forth and create and customize.
+Easy of use + Scriptablity
+==========================
+
+-   Pleanty of examples of scriptin Pandoc in:
+    -   Haskell
+    -   Python
+    -   Perl
+    -   others
+    -   If you can handle JSON you can script Pandoc
+-   Go forth and create and customize.

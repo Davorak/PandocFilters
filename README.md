@@ -344,7 +344,7 @@ example = hrule (2 * sum sizes) === circles # centerX
 main = renderSVG "diaExample.svg" (Width 500)  (example # lw 0.2)
 ```
 
-![test](./diaExample.svg "test title")
+![test](./diaExample.png "test title")
 
 Easy of use + Scriptablity
 ==========================

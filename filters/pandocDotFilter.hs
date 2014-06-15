@@ -1,5 +1,4 @@
 #!/usr/bin/env runhaskell
--- behead2.hs
 import Text.Pandoc.JSON
 
 import System.Process
